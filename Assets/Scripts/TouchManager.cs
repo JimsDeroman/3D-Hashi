@@ -69,21 +69,15 @@ public class TouchManager : MonoBehaviour
 
                         if (sCoordinatesA[1].Equals(sCoordinatesB[1]) && sCoordinatesA[2].Equals(sCoordinatesB[2])) // Paralelos en x
                         {
-                            Debug.Log("X paralel");
                             axis = 1;
                             int aux = Int32.Parse(sCoordinatesA[0] + ""), end = Int32.Parse(sCoordinatesB[0] + "");
-                            Debug.Log("AUX:" + aux + " END: " + end);
                             if (end > aux)
                             {
                                 aux++;
                                 while (end > aux)
                                 {
-                                    Debug.Log("There is a distance of 2 at least");
                                     if (!grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).isEmptY())
                                     {
-                                        Debug.Log("No esta vacio");
-                                        Debug.Log("Has bridge:" + grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).isBridged());
-                                        Debug.Log("Has island in " + aux + " " + sCoordinatesA[1] + " " + sCoordinatesA[2] + ":" + grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).hasIsland()); able = false;
                                     }
                                     aux++;
                                 }
@@ -93,12 +87,8 @@ public class TouchManager : MonoBehaviour
                                 aux--;
                                 while (end < aux)
                                 {
-                                    Debug.Log("There is a distance of 2 at least");
                                     if (!grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).isEmptY())
                                     {
-                                        Debug.Log("No esta vacio");
-                                        Debug.Log("Has bridge:" + grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).isBridged());
-                                        Debug.Log("Has island in " + aux + " " + sCoordinatesA[1] + " " + sCoordinatesA[2] + ":" + grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).hasIsland()); able = false;
                                         able = false;
                                     }
                                     aux--;
@@ -107,7 +97,6 @@ public class TouchManager : MonoBehaviour
                         }
                         else if (sCoordinatesA[0].Equals(sCoordinatesB[0]) && sCoordinatesA[2].Equals(sCoordinatesB[2])) // Paralelos en y
                         {
-                            Debug.Log("Y paralel");
                             axis = 2;
                             int aux = Int32.Parse(sCoordinatesA[1] + ""), end = Int32.Parse(sCoordinatesB[1] + "");
                             if (end > aux)
@@ -117,7 +106,6 @@ public class TouchManager : MonoBehaviour
                                 {
                                     if (!grid.getIntersection(Int32.Parse(sCoordinatesA[0] + ""), aux, Int32.Parse(sCoordinatesA[2] + "")).isEmptY())
                                     {
-                                        Debug.Log("Has island:" + grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).isEmptY());
                                         able = false;
                                     }
                                     aux++;
@@ -130,7 +118,6 @@ public class TouchManager : MonoBehaviour
                                 {
                                     if (!grid.getIntersection(Int32.Parse(sCoordinatesA[0] + ""), aux, Int32.Parse(sCoordinatesA[2] + "")).isEmptY())
                                     {
-                                        Debug.Log("Has island:" + grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).isEmptY());
                                         able = false;
                                     }
                                     aux--;
@@ -139,7 +126,6 @@ public class TouchManager : MonoBehaviour
                         }
                         else if (sCoordinatesA[0].Equals(sCoordinatesB[0]) && sCoordinatesA[1].Equals(sCoordinatesB[1])) // Paralelos en z
                         {
-                            Debug.Log("Z paralel");
                             axis = 3;
                             int aux = Int32.Parse(sCoordinatesA[2] + ""), end = Int32.Parse(sCoordinatesB[2] + "");
                             if (end > aux)
@@ -149,7 +135,6 @@ public class TouchManager : MonoBehaviour
                                 {
                                     if (!grid.getIntersection(Int32.Parse(sCoordinatesA[0] + ""), Int32.Parse(sCoordinatesA[1] + ""), aux).isEmptY())
                                     {
-                                        Debug.Log("Has island:" + grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).isEmptY());
                                         able = false;
                                     }
                                     aux++;
@@ -162,7 +147,6 @@ public class TouchManager : MonoBehaviour
                                 {
                                     if (!grid.getIntersection(Int32.Parse(sCoordinatesA[0] + ""), Int32.Parse(sCoordinatesA[1] + ""), aux).isEmptY())
                                     {
-                                        Debug.Log("Has island:" + grid.getIntersection(aux, Int32.Parse(sCoordinatesA[1] + ""), Int32.Parse(sCoordinatesA[2] + "")).isEmptY());
                                         able = false;
                                     }
                                     aux--;
@@ -298,7 +282,6 @@ public class TouchManager : MonoBehaviour
                                 // ENDING: Then we build a bridge between these 2 gameobjects and then deselect
                                 if (able)
                                 {
-                                    Debug.Log("Able");
                                     string aName = selectedA.transform.parent.name;
                                     string bName = hit.transform.parent.name;
                                     Island a = generator.getIsland(Int32.Parse(aName[0] + ""), Int32.Parse(aName[1] + ""), Int32.Parse(aName[2] + ""));
@@ -382,7 +365,6 @@ public class TouchManager : MonoBehaviour
                         {
                             // Nope, this two objects cannot be bridged
                             // ENDING: Then no bridge here, nothing should happen, maybe a warning alert
-                            Debug.Log("Cannot be bridged");
                         }
                     }
                     else
@@ -464,7 +446,6 @@ public class TouchManager : MonoBehaviour
 
                             if (sCoordinatesA[1].Equals(sCoordinatesB[1]) && sCoordinatesA[2].Equals(sCoordinatesB[2])) // Paralelos en x
                             {
-                                Debug.Log("X paralel");
                                 axis = 1;
                                 int aux = Int32.Parse(sCoordinatesA[0] + ""), end = Int32.Parse(sCoordinatesB[0] + "");
                                 if (end > aux)
@@ -494,7 +475,6 @@ public class TouchManager : MonoBehaviour
                             }
                             else if (sCoordinatesA[0].Equals(sCoordinatesB[0]) && sCoordinatesA[2].Equals(sCoordinatesB[2])) // Paralelos en y
                             {
-                                Debug.Log("Y paralel");
                                 axis = 2;
                                 int aux = Int32.Parse(sCoordinatesA[1] + ""), end = Int32.Parse(sCoordinatesB[1] + "");
                                 if (end > aux)
@@ -524,7 +504,6 @@ public class TouchManager : MonoBehaviour
                             }
                             else if (sCoordinatesA[0].Equals(sCoordinatesB[0]) && sCoordinatesA[1].Equals(sCoordinatesB[1])) // Paralelos en z
                             {
-                                Debug.Log("Z paralel");
                                 axis = 3;
                                 int aux = Int32.Parse(sCoordinatesA[2] + ""), end = Int32.Parse(sCoordinatesB[2] + "");
                                 if (end > aux)
@@ -681,7 +660,6 @@ public class TouchManager : MonoBehaviour
                                     // ENDING: Then we build a bridge between these 2 gameobjects and then deselect
                                     if (able)
                                     {
-                                        Debug.Log("Able");
                                         string aName = selectedA.transform.parent.name;
                                         string bName = hit.transform.parent.name;
                                         Island a = generator.getIsland(Int32.Parse(aName[0] + ""), Int32.Parse(aName[1] + ""), Int32.Parse(aName[2] + ""));
@@ -765,7 +743,6 @@ public class TouchManager : MonoBehaviour
                             {
                                 // Nope, this two objects cannot be bridged
                                 // ENDING: Then no bridge here, nothing should happen, maybe a warning alert
-                                Debug.Log("Cannot be bridged");
                             }
                         }
                         else
