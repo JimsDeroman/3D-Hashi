@@ -56,7 +56,6 @@ public class Island
 
     public void deleteBridge(Bridge bridge)
     {
-        Debug.Log("Islands delete Bridge begins");
         string sCoordinatesA = bridge.getA().getIntersection().getCoordinates();
         string sCoordinatesB = bridge.getB().getIntersection().getCoordinates();
 
@@ -65,15 +64,12 @@ public class Island
         {
             if ((b.getA().getIntersection().getCoordinates().Equals(sCoordinatesA) && b.getB().getIntersection().getCoordinates().Equals(sCoordinatesB)) || (b.getA().getIntersection().getCoordinates().Equals(sCoordinatesB) && b.getB().getIntersection().getCoordinates().Equals(sCoordinatesA)))
             {
-                Debug.Log("Encontrado el puente en el island");
                 break;
             }
 
             index++;
         }
-        Debug.Log(bridgeList.Count + " " + index);
         bridgeList.RemoveAt(index);
-        Debug.Log("Deleted from Island");
     }
 
     public void clearBridges()

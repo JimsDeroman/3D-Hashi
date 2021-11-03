@@ -22,7 +22,6 @@ public class PositionGrid : MonoBehaviour
             positionGrid[i] = child.gameObject;
             i++;
         }
-        Debug.Log("created positionGrid with length" + positionGrid.Length);
     }
 
     // Only for dimension == 3

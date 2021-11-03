@@ -79,7 +79,6 @@ public class Generator : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log(PlayerPrefs.GetInt("dificulty"));
         
         switch (PlayerPrefs.GetInt("dificulty"))
         {
@@ -177,7 +176,6 @@ public class Generator : MonoBehaviour
 
     private void generateMedium()
     {
-        Debug.Log("GEN MEDIUM");
         init();
         generate();
 
@@ -281,18 +279,15 @@ public class Generator : MonoBehaviour
         // Inicializamos la lista de bridges
         bridgeList = new List<Bridge>();
 
-        Debug.Log(dimensionX + " " + dimensionY + " " + dimensionZ);
         // Elegimos una interseccion al azar y creamos a partir de ahi un camino conexo aleatorio
         int rX = Random.Range(0, dimensionX), rY = Random.Range(0, dimensionY), rZ = Random.Range(0, dimensionZ);
 
-        Debug.Log("Las coordenadas de partida son: " + rX + rY + rZ);
 
         grid.getIntersection(rX, rY, rZ).placeIsland();
         PositionGrid.GetComponent<PositionGrid>().setIsland(rX, rY, rZ);
 
         generateNewFromIntersection(rX, rY, rZ);
 
-        Debug.Log("Camino generado");
 
         // Elegimos una interseccion que contenga una isla creada en el camino anterior para generar un nuevo camino a partir de esa isla (deberiamos repetir este paso? cuantas veces? De momento se ejecuta una sola vez)
         while (true)
@@ -301,41 +296,33 @@ public class Generator : MonoBehaviour
             if (grid.getIntersection(rX, rY, rZ).hasIsland()) break;
         }
 
-        Debug.Log("La isla elegida esta en: " + rX + rY + rZ);
 
         generateNewFromIntersection(rX, rY, rZ);
 
-        Debug.Log("Nuevo camino generado");
 
         if (PlayerPrefs.GetInt("dificulty") == 3)
         {
-            Debug.Log("Como está en difícil, vamos a generar o caminho extra");
             while (true)
             {
                 rX = Random.Range(0, dimensionX); rY = Random.Range(0, dimensionY); rZ = Random.Range(0, dimensionZ);
                 if (grid.getIntersection(rX, rY, rZ).hasIsland()) break;
             }
 
-            Debug.Log("La isla elegida esta en: " + rX + rY + rZ);
 
             generateNewFromIntersection(rX, rY, rZ);
 
-            Debug.Log("Nuevo camino generado");
 
             if (PlayerPrefs.GetInt("dimensionX") == 4)
             {
-                Debug.Log("Como encima está en 4x4, vamos a generar OTRO caminho extra :O");
                 while (true)
                 {
                     rX = Random.Range(0, dimensionX); rY = Random.Range(0, dimensionY); rZ = Random.Range(0, dimensionZ);
                     if (grid.getIntersection(rX, rY, rZ).hasIsland()) break;
                 }
 
-                Debug.Log("La isla elegida esta en: " + rX + rY + rZ);
 
                 generateNewFromIntersection(rX, rY, rZ);
 
-                Debug.Log("Nuevo camino generado");
             }
         }
 
@@ -346,19 +333,16 @@ public class Generator : MonoBehaviour
 
         printAllBridges();
 
-        Debug.Log(bridgeLines.Count + " " + bridgeLines.Count);
 
         // Echar cuentas
 
         calculateNeededBridges();
 
-        Debug.Log("Calculados los bridges");
 
         // Borar todos los puentes
 
         deleteAllBridges();
 
-        Debug.Log("A tomar por culo los bridges");
     }
 
 
@@ -892,11 +876,9 @@ public class Generator : MonoBehaviour
             // Hay que checkear si estan interconectados todos los puentes
             if (interconnectedBridges())
             {
-                Debug.Log("Real victory");
                 VictoryPanel.SetActive(true);
                 Time.timeScale = 0;
                 int time = GameObject.Find("Canvas/TimeCounter").GetComponent<TimeCount>().getTimeInSeconds();
-                Debug.Log("Time result (in seconds) is: " + time);
                 bool record = false;
 
                 // For the record, I need to set it first at 50 hours (for example)
